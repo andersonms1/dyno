@@ -4,6 +4,9 @@ import './App.css';
 import Dog from './Dog'
 
 
+
+
+
 class App extends Component {
 
   state = {
@@ -16,11 +19,10 @@ class App extends Component {
 
     try{
       const res = await fetch('https://dog.ceo/api/breeds/list/all')
-      const dogs = await res.json();
-      
+      const dogs_api = await res.json();  
       
       this.setState({
-        dogs: dogs,
+        dogs: dogs_api.message,
       });
 
     }catch(e){
@@ -37,15 +39,16 @@ class App extends Component {
     return (
       
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
+       
 
-        <Dog breed={'Alemao'}/>
+        {Object.keys(this.state.dogs).map((dog, index) => <Dog  key={index} breed={dog}/>)}
 
-        {/* {this.state.dogs.map((dog, index) => <Dog  key={index} breed={message.dog}/>)} */}
+       
+
 
       </div>
+
+      
 
       
 

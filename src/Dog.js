@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 
-class Dog extends Component {
+const SERVER_PATH = 'https://dog.ceo/api/breed/'
+const RANDOM_END = '/images/random'
 
-    render(){
-        return (
-            <div>
-                {this.props.breed}
-            </div>
-        );
-    }
 
-}
+const Dog = ({ dog }) => (
+    <div>
+        <img src={`${SERVER_PATH}${dog}${RANDOM_END}` />
+    </div>
 
-// const Dog = ({ message }) => (
-//     <div>
-//         <h3>message.dog</h3>
-//     </div>
-// );
+);
+
+
+// class Dog extends Component {
+
+//     render(){
+//         return (
+//             <div>
+//                 {this.props.breed}
+//             </div>
+//         );
+//     }
+
+// }
+
 
 export default Dog;
