@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 
-const SERVER_PATH = 'https://dog.ceo/api/breed/'
-const RANDOM_END = '/images/random'
 
 
-const Dog = ({ dog }) => (
+// const Dog = ({ dog }) => (
+//     <div>
+//         <img src={`${SERVER_PATH}${dog}${RANDOM_END}` />
+//     </div>
+
+// );
+
+
+
+const Dog = (props) =>(
     <div>
-        <img src={`${SERVER_PATH}${dog}${RANDOM_END}` />
+        {props.breed}
+        {/* <img src={`${props.img}`} alt={props.img}/> */}
     </div>
-
 );
-
 
 // class Dog extends Component {
 
