@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 class DogList extends Component {
 
     state = {
-        image_url: "",
+        image: {
+            name: "",
+            url: "",
+        }
     }
 
 
@@ -15,9 +19,13 @@ class DogList extends Component {
 
         axios.get(`${SERVER_PATH}${breed_name}${RANDOM_END}`)
             .then(res =>{
-    
+                
+
                 this.setState({
-                    image_url: res.data.message
+                    image : {
+                        name: breed_name,
+                        url: res.data.message
+                    }
                 })
             })
         
@@ -39,7 +47,9 @@ class DogList extends Component {
         return (
             <div>
                 <h1>
-                    <img src={this.state.image_url} alt={this.props.breed}/>
+                    <Link to = {`/${this.state.image.name}`}>
+                        <img src={this.state.image.url} alt={this.props.breed}/>
+                    </Link>
                 </h1>
                 
             </div>

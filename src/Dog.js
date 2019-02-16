@@ -36,7 +36,6 @@ class Dog extends Component {
                 <h1>
                     Hello, Friend
                 </h1>
-                {console.log(this.state.dogs)}
                 {Object.keys(this.state.dogs).map((dog, index) => 
                 <DogList key={index} breed={dog}/>)}
                 {/* <img src={this.state.image_url} alt={this.props.breed}/> */}
