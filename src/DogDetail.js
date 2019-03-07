@@ -1,64 +1,72 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import styled from 'styled-components'
-
+import PropTypes from 'prop-types';
+import { Item, MyGrid } from './Dog';
 
 class DogList extends Component {
+  state = {
+    imageUrl: [],
+  }
 
-    state = {
-        image_url: [],
-    }
+  static propTypes ={
 
-
-
-    fetch_imgs(breed_name){
-
-
-        const SERVER_PATH = 'https://dog.ceo/api/breed/'
-        const RANDOM_END = '/images/random/'
-        const IMGS_NUMBER = '10'
-
-        axios.get(`${SERVER_PATH}${breed_name}${RANDOM_END}${IMGS_NUMBER}`)
-            .then(res =>{
-    
-                this.setState({
-                    image_url: res.data.message
-                })
-            })
-        
-    }
+    // eslint-disable-next-line react/forbid-prop-types
+    match: PropTypes.object,
 
 
-    print_state(state_obj){
-        console.log(state_obj)
-    }
+  }
 
-    componentDidMount(){
-        
-        this.fetch_imgs(this.props.match.params.name)
-     
-    }
+  static defaultProps ={
+    match: {
+      params: {
+        name: 'notfound',
+      },
+    },
 
-    render(){
+  }
 
-        return (
-            <DogDetailGrid>
-                {this.state.image_url.map(
-                    (dog, index) => <img src={dog} key={index} alt={index}/>
-                )}
-                
-            </DogDetailGrid>
-        );
-    }
 
+  componentDidMount() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.fetchImgs(this.props.match.params.name);
+  }
+
+  fetchImgs(breedName) {
+    const SERVER_PATH = 'https://dog.ceo/api/breed/';
+    const RANDOM_END = '/images/random/';
+    const IMGS_NUMBER = '9';
+
+    axios.get(`${SERVER_PATH}${breedName}${RANDOM_END}${IMGS_NUMBER}`)
+      .then((res) => {
+        this.setState({
+          imageUrl: res.data.message,
+        });
+      });
+  }
+
+
+  render() {
+    const { imageUrl } = this.state;
+
+    return (
+      <div className="App">
+        <MyGrid grids={3}>
+          {imageUrl.map(
+            (dog, index) => (
+              <Item
+                src={dog}
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                alt={index}
+              />
+            ),
+          )}
+
+        </MyGrid>
+      </div>
+
+    );
+  }
 }
 
 export default DogList;
-
-const DogDetailGrid = styled.div`
-
-    display: grid;
-    padding: 1rem;
-    grid-template-columns: repeat(6, 1fr);
-    grid-row-gap: 1 rem;
-`

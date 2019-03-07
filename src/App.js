@@ -2,48 +2,60 @@ import React from 'react';
 import './App.css';
 
 
-import Dog from './Dog'
-import Test from './Test'
-import DogDetail from './DogDetail'
-import logo from './header.jpg'
-
-import{
+import {
   BrowserRouter as Router,
   Route,
   Switch,
   Link,
-}from 'react-router-dom';
+} from 'react-router-dom';
+import Dog from './Dog';
+import DogDetail from './DogDetail';
 
 
 const App = () => (
   <Router>
     <div className="App">
-      <header >
-        <Link to="/">
-          <img src={logo} alt={""}/>
-        </Link>
+      <header>
+
+        <div className="App-header">
+          <Link to="/">
+            <h1>
+                Bem-vindo ao DYNO
+            </h1>
+          </Link>
+
+          <p>
+Aplicação desenvolvida para fins didáticos, e o objeto de estudo é o React.
+            Os principais conceitos abordados:
+
+          </p>
+
+          <ul>
+            <li>Components</li>
+            <li>Props</li>
+            <li>State</li>
+            <li>Lifecycle Methods</li>
+            <li>Requisições REST com axios</li>
+            <li>Navegação com REACT-ROUTER-DOM</li>
+          </ul>
+
+
+        </div>
       </header>
+
+
       <Switch>
-        
-        <Route path="/aaa" component={Test}/>
-        <Route exact path="/" component={Dog}/>
-        <Route path="/:name" component={DogDetail}/>
-        
-      </Switch>      
-    
+
+        <Route exact path="/" component={Dog} />
+        <Route path="/:name" component={DogDetail} />
+
+      </Switch>
+
     </div>
-   
+
   </Router>
 
 );
 
-
-// const Test = () => (
-//   <div>
-//     {console.log("Anderson")}
-//     <h1> Ola sou um teste </h1>
-//   </div>
-  
-// )
 
 export default App;
